@@ -1,0 +1,3417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DataPolis — Investigación y Consciencia ciudadana</title>
+  <meta name="description" content="DataPolis - colectivo de investigación y concientización social y económica en Perú con tecnología cuántica." />
+  
+  
+  <link rel="stylesheet" href="quantum.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="css/micro-interactions.css" />
+  <link rel="stylesheet" href="responsive.css" />
+  <link rel="stylesheet" href="splash.css" />
+  
+  <style>
+    /* Variables y reset */
+    :root {
+      --primary: #ffdd00;
+      --black: #0b0b0b;
+      --dark: #1a1a1a;
+      --gray: #666666;
+      --light-gray: #f0f0f0;
+      --white: #ffffff;
+      --transition: all 0.3s ease;
+      --color-navy-deep: #0a192f;
+      --color-navy-light: #112240;
+      --color-slate-dark: #495670;
+      --color-slate-base: #8892b0;
+      --color-slate-light: #a8b2d1;
+      --color-slate-lightest: #ccd6f6;
+      --color-gold-modern: #ffd700;
+      --spacing-xxl: 4rem;
+      --border-radius-modern: 8px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--black);
+      background-color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "kern" 1;
+      font-kerning: normal;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      letter-spacing: -0.02em;
+      color: inherit;
+    }
+    
+    p, span, a, li {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Header y navegación - MEJORADO */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+      backdrop-filter: blur(15px);
+      border-bottom: 2px solid rgba(255, 215, 0, 0.1);
+      padding: 12px 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    header.scrolled {
+      background: linear-gradient(180deg, rgba(11, 11, 11, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%) !important;
+      border-bottom: 2px solid #FFD700;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      padding: 10px 0;
+    }
+    
+    header.scrolled .nav-link,
+    header.scrolled .logo-text {
+      color: #ffdd00 !important;
+    }
+    
+    header.scrolled .hamburger span {
+      background: #ffdd00 !important;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover img {
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--black);
+      letter-spacing: -0.5px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-weight: 600;
+      font-size: 0.95rem;
+      position: relative;
+      padding: 8px 0;
+      color: #0b0b0b;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #FFD700, #FFA500);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 2px;
+    }
+
+    .nav-link:hover {
+      color: #FFD700;
+      transform: translateY(-2px);
+    }
+
+    .nav-link:hover::before,
+    .nav-link.active::before {
+      width: 100%;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 6px;
+      padding: 8px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger:hover {
+      background: rgba(255, 221, 0, 0.1);
+    }
+
+    .hamburger span {
+      width: 28px;
+      height: 3px;
+      background: linear-gradient(90deg, #FFD700, #FFA500);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+    }
+
+    .hamburger:hover span {
+      background: linear-gradient(90deg, #FFA500, #FFD700);
+    }
+
+    /* Logos redes sociales header */
+    header a[href*="youtube"]:hover svg,
+    header a[href*="instagram"]:hover svg,
+    header a[href*="linkedin"]:hover svg,
+    header a[href*="tiktok"]:hover svg,
+    header a[href*="whatsapp"]:hover svg {
+      transform: scale(1.15);
+      filter: drop-shadow(0 4px 8px currentColor);
+    }
+
+    /* Slider Arrows */
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0a192f;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+      z-index: 10;
+    }
+
+    .slider-arrow:hover {
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6);
+      background: linear-gradient(135deg, #FFA500, #FFD700);
+    }
+
+    .slider-arrow:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .slider-arrow-left {
+      left: -70px;
+    }
+
+    .slider-arrow-right {
+      right: -70px;
+    }
+
+    /* Hero section */
+    .hero {
+      padding: 160px 0 100px;
+      background: linear-gradient(135deg, #fff 0%, #fffbeb 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+      opacity: 0.1;
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      color: var(--black);
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      color: var(--gray);
+      margin-bottom: 30px;
+      max-width: 500px;
+    }
+
+    .btn,
+    .project-card .btn,
+    .investigation-card .btn {
+      background: #ffdd00;
+      color: #232323;
+      font-weight: bold;
+    }
+    .btn-outline {
+      border: 2px solid #ffdd00;
+      color: #232323;
+    }
+    .btn:hover,
+    .project-card .btn:hover,
+    .investigation-card .btn:hover {
+      background: #232323;
+      color: #ffdd00;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-image {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+    }
+
+    .hero-image:hover {
+      transform: translateY(-10px);
+    }
+
+    .stats {
+      display: flex;
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+
+    .stat-text {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    /* Secciones generales */
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+      color: #666;
+      line-height: 1.6;
+      letter-spacing: 0.3px;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Quiénes somos */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .about-card {
+      background-color: var(--white);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .about-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-tag {
+      display: inline-block;
+      padding: 6px 15px;
+      background-color: var(--primary);
+      color: var(--black);
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .about-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .timeline {
+      margin-top: 40px;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 30px;
+    }
+
+    .timeline-year {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 80px;
+    }
+
+    .timeline-content {
+      padding-left: 20px;
+      border-left: 2px solid var(--primary);
+      margin-left: 20px;
+    }
+
+    /* Proyectos */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .project-card,
+    .investigation-card {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: var(--white);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15), 0 10px 30px rgba(0,0,0,0.4);
+      transition: var(--transition);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .project-card:hover,
+    .investigation-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .project-card h3,
+    .investigation-card h3 {
+      color: var(--primary);
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      line-height: 1.3;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .project-card p,
+    .investigation-card p {
+      line-height: 1.6;
+      margin-bottom: 15px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+      color: #ccc;
+    }
+
+    .project-card .btn,
+    .investigation-card .btn {
+      background: var(--primary);
+      color: var(--black);
+      font-weight: bold;
+      transition: var(--transition);
+      margin-top: auto;
+    }
+
+    .project-card .btn:hover,
+    .investigation-card .btn:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      flex-shrink: 0;
+      position: relative;
+      filter: brightness(0.7) contrast(1.1);
+    }
+
+    .project-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.4) 100%);
+    }
+
+    .project-content {
+      padding: 30px;
+      background: linear-gradient(180deg, rgba(26, 26, 26, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    /* Equipo */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .team-member {
+      background-color: var(--white);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .team-member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .member-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .member-info {
+      padding: 25px;
+    }
+
+    .member-name {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+      color: var(--white);
+    }
+
+    .member-role {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .member-contact {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* Contacto */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--black);
+      font-size: 1.2rem;
+    }
+
+    .contact-text h4 {
+      margin-bottom: 5px;
+    }
+
+    .contact-text p {
+      color: var(--gray);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--light-gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background-color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark);
+      color: var(--white);
+      padding: 60px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background-color: var(--primary);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+      padding-left: 5px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    /* FOOTER MEJORADO - ESTILOS ADICIONALES */
+    footer a {
+      position: relative;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    footer a:hover {
+      color: #FFD700 !important;
+    }
+
+    footer li a::before {
+      content: '';
+      position: absolute;
+      left: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 2px;
+      background: #FFD700;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    footer li a:hover::before {
+      width: 10px;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background-color: var(--white);
+      width: 90%;
+      max-width: 800px;
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      transform: translateY(50px);
+      transition: var(--transition);
+    }
+
+    .modal.open .modal-content {
+      transform: translateY(0);
+    }
+
+    .modal-image {
+      width: 40%;
+      object-fit: cover;
+    }
+
+    .modal-info {
+      width: 60%;
+      padding: 30px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    /* Contact Form */
+    .contact-form form {
+      background: var(--white);
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+      padding: 30px 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-group label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--light-gray);
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #fafafa;
+      transition: border-color 0.2s;
+      outline: none;
+      margin-top: 2px;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--primary);
+      background: #fff;
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .contact-form .btn {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* Nuevas clases para la sección de aliados */
+    .collage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin: 40px 0 0 0;
+    }
+
+    /**
+     * Styles for the images in the collage section.
+     * The images should have a width of 100% and a height of 180px.
+     * The object-fit property should be set to cover.
+     * The border-radius should be set to 14px.
+     * The box-shadow should be set to 0 4px 18px rgba(0,0,0,0.10).
+     * The transition should be set to transform 0.2s.
+     */
+    .collage-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+      transition: transform 0.2s;
+    }
+
+    .collage-img:hover {
+      transform: scale(1.04) translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+
+
+    .aliados-section img {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: transform 0.2s;
+    }
+
+    .aliados-section img:hover {
+      transform: scale(1.08);
+    }
+
+    /* Hamburguesa color negro y amarillo al scroll */
+    .hamburger span {
+      background: #232323;
+      transition: background 0.3s;
+    }
+    /**
+     * Cambia el color de fondo de la hamburguesa a rojo cuando
+     * el header tiene la clase "scrolled".
+     */
+    header.scrolled .hamburger span {
+      background: #ffdd00 !important;
+    }   
+    /* Fondo azul y rojo para imágenes de equipo */
+    .member-img-bg {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px auto;
+      border: 3px solid #ffdd00;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      overflow: hidden;
+      position: relative;
+    }
+    .fondo-azul {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    }
+    .fondo-rojo {
+      background: linear-gradient(135deg, #c31432 0%, #ff4e50 100%);
+    }
+    .member-img-bg img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      background: transparent;
+      z-index: 2;
+    }
+    /* Logos misión y visión */
+    .card-tag svg {
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    /* Estilos para el menú hamburguesa lateral */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 320px;
+      max-width: 90vw;
+      height: 100%;
+      background: linear-gradient(135deg, #232323 80%, #ffdd00 100%);
+      color: #fff;
+      z-index: 3000;
+      transform: translateX(100%) !important;
+      transition: transform 0.35s cubic-bezier(.77,0,.18,1);
+      box-shadow: -2px 0 18px rgba(0,0,0,0.18);
+      padding: 48px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      border-radius: 0 0 0 18px;
+      will-change: transform;
+    }
+
+    .side-menu.open {
+      transform: translateX(0) !important;
+    }
+
+    .close-menu {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 2.2rem;
+      color: #ffdd00;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .side-menu ul {
+      list-style: none;
+      padding: 0 32px;
+      margin: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .side-menu ul li {
+      margin-bottom: 8px;
+    }
+
+    .side-menu ul li a {
+      color: #ffdd00;
+      font-size: 1.15rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 12px 0;
+      border-radius: 8px;
+      display: block;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .side-menu ul li a:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      padding-left: 8px;
+    }
+
+    .side-menu ul li:not(:last-child) {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Mejoras menú hamburguesa y lateral */
+    .hamburger-btn {
+      position: fixed;
+      top: 22px;
+      right: 22px;
+      z-index: 3500;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: rgba(255,255,255,0.92);
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .hamburger-btn:hover {
+      background: #ffdd00;
+    }
+    .hamburger-btn span {
+      display: block;
+      height: 4px;
+      width: 28px;
+      background: #232323;
+      border-radius: 2px;
+      margin: 4px 0;
+      transition: background 0.3s;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .container {
+        width: 98%;
+        padding: 0 15px;
+      }
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+      .section {
+        padding: 60px 0;
+      }
+      .projects-grid,
+      .team-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      /* Hero responsive tablet */
+      #inicio h1 {
+        font-size: 2.5rem !important;
+      }
+      #inicio > div > div:first-child > div {
+        padding: 2rem !important;
+      }
+      #inicio > div > div:nth-child(2) {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .container {
+        width: 100%;
+        padding: 0 15px;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+      .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+      }
+      .hero {
+        padding: 90px 0 40px !important;
+      }
+      .side-menu {
+        width: 90vw;
+        min-width: 220px;
+        border-radius: 0 0 0 12px;
+        padding-top: 38px;
+      }
+      .side-menu ul {
+        padding: 0 18px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .team-card,
+      .about-card {
+        max-width: 98vw !important;
+        padding: 18px 12px !important;
+      }
+      .project-card,
+      .investigation-card {
+        padding: 12px 6px !important;
+      }
+      /* Hero responsive móvil */
+      #inicio {
+        padding: 4rem 0 2rem !important;
+      }
+      #inicio h1 {
+        font-size: 1.8rem !important;
+        line-height: 1.3 !important;
+        padding: 0 10px !important;
+      }
+      #inicio > div {
+        padding: 0 10px !important;
+      }
+      #inicio > div > div:first-child {
+        margin-bottom: 1.5rem !important;
+      }
+      #inicio > div > div:first-child > div {
+        padding: 1.2rem !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+      }
+      #inicio > div > div:first-child p {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+      }
+      #inicio > div > div:nth-child(2) {
+        grid-template-columns: 1fr !important;
+        gap: 1.2rem !important;
+        max-width: 100% !important;
+      }
+      #inicio > div > div:nth-child(2) > div {
+        margin: 0 !important;
+      }
+      #inicio > div > div:nth-child(2) > div h3 {
+        font-size: 1.2rem !important;
+      }
+      #inicio > div > div:nth-child(2) > div p {
+        font-size: 0.95rem !important;
+      }
+      #inicio > div > div:nth-child(2) > div > div:first-child {
+        height: 140px !important;
+      }
+      #inicio > div > div:nth-child(2) > div > div:last-child {
+        padding: 1.2rem !important;
+      }
+      #inicio > div > div:last-child {
+        padding: 1.5rem !important;
+        margin-top: 1.5rem !important;
+        max-width: 100% !important;
+      }
+      #inicio > div > div:last-child h3 {
+        font-size: 1.3rem !important;
+      }
+      #inicio > div > div:last-child p {
+        font-size: 0.95rem !important;
+        line-height: 1.7 !important;
+      }
+      /* Quiénes Somos responsive */
+      #quienes {
+        padding: 2.5rem 0 !important;
+      }
+      #quienes .container > div {
+        padding: 0 10px !important;
+      }
+      #quienes h2 {
+        font-size: 1.8rem !important;
+      }
+      #quienes p {
+        font-size: 0.95rem !important;
+      }
+      #quienes > div > div > div {
+        padding: 1.2rem !important;
+      }
+      /* Header en móvil */
+      header {
+        padding: 10px 0 !important;
+      }
+      header .container {
+        padding: 0 10px !important;
+      }
+      .logo-text {
+        font-size: 1rem !important;
+      }
+      header a[href*="youtube"] svg,
+      header a[href*="instagram"] svg,
+      header a[href*="linkedin"] svg,
+      header a[href*="tiktok"] svg,
+      header a[href*="whatsapp"] svg {
+        width: 22px !important;
+        height: 22px !important;
+      }
+    }
+
+    /* Mobile header nav dropdown behavior */
+    @media (max-width: 900px) {
+      header .hamburger {
+        display: flex;
+      }
+      header .nav-menu {
+        display: none;
+        position: absolute;
+        top: 64px;
+        right: 12px;
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.08);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px 14px;
+        z-index: 2002;
+      }
+      header .nav-menu li {
+        margin: 0;
+      }
+      header .nav-menu.active {
+        display: flex;
+      }
+    }
+
+    /* NEW DESIGN SYSTEM */
+    .publication-card {
+      background-color: var(--color-navy-light);
+      padding: var(--spacing-xxl);
+      border-radius: var(--border-radius-modern);
+      box-shadow: 0 10px 30px -15px rgba(0,0,0,0.3);
+      transition: var(--transition);
+    }
+    
+    .publication-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    /* Adding scroll animations */
+    [data-animation] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    [data-animation].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- SPLASH SCREEN -->
+  <div id="splash-screen">
+    <div class="splash-content">
+      <div class="splash-logo">
+        <span class="splash-logo-text">DP</span>
+      </div>
+      <h1 class="splash-title">DataPolis</h1>
+      <p class="splash-subtitle">Investigación y Consciencia para el Perú</p>
+      <div class="splash-loader"></div>
+    </div>
+  </div>
+
+  <!-- QUANTUM CONTAINER -->
+  <div id="quantum-main-container" class="quantum-container">
+    
+    <!-- ADVANCED NAVIGATION SYSTEM -->
+    <nav class="quantum-nav" id="quantumNav">
+      <div class="nav-quantum-bg"></div>
+      <div class="nav-container">
+        <div class="nav-brand">
+          <img src="logo.png" alt="DataPolis" class="nav-logo">
+          <span class="nav-brand-text">DataPolis</span>
+        </div>
+        
+        <div class="nav-menu" id="navMenu">
+          <a href="#inicio" class="nav-link quantum-link" data-section="inicio">
+            <span class="link-text">Inicio</span>
+            <span class="link-quantum-effect"></span>
+          </a>
+          <a href="#investigacion" class="nav-link quantum-link" data-section="investigacion">
+            <span class="link-text">Investigación</span>
+            <span class="link-quantum-effect"></span>
+          </a>
+          <a href="#proyectos" class="nav-link quantum-link" data-section="proyectos">
+            <span class="link-text">Proyectos</span>
+            <span class="link-quantum-effect"></span>
+          </a>
+          <a href="#equipo" class="nav-link quantum-link" data-section="equipo">
+            <span class="link-text">Equipo</span>
+            <span class="link-quantum-effect"></span>
+          </a>
+          <a href="#publicaciones" class="nav-link quantum-link" data-section="publicaciones">
+            <span class="link-text">Publicaciones</span>
+            <span class="link-quantum-effect"></span>
+          </a>
+          <a href="#contacto" class="nav-link quantum-link" data-section="contacto">
+            <span class="link-text">Contacto</span>
+            <span class="link-quantum-effect"></span>
+          </a>
+        </div>
+        
+        <div class="nav-quantum-toggle" id="navToggle">
+          <span class="toggle-line"></span>
+          <span class="toggle-line"></span>
+          <span class="toggle-line"></span>
+        </div>
+      </div>
+    </nav>
+
+ 
+   
+
+ 
+  <!-- Header -->
+  <header id="header">
+    <div class="container header-container">
+      <a href="#" class="logo">
+        <img src="Imagens/DP.jpg" alt="Datapolis Logo">
+        <span class="logo-text">Datapolis</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+        <li><a href="#quienes" class="nav-link">Quiénes Somos</a></li>
+        <li><a href="#investigaciones" class="nav-link">Investigaciones</a></li>
+        <li><a href="#equipo" class="nav-link">Equipo</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+      </ul>
+      <!-- Redes sociales en el header -->
+      <div style="display:flex;align-items:center;gap:12px;margin-left:15px;">
+        <a href="https://youtube.com/@datapolis-y3v?si=7fYTIVnSGywhjXhm" target="_blank" title="YouTube" style="display:flex;align-items:center;transition:transform 0.2s;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#FF0000" style="filter:drop-shadow(0 2px 4px rgba(255,0,0,0.3));">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/datapolisinvestiga" target="_blank" title="Instagram" style="display:flex;align-items:center;transition:transform 0.2s;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="url(#instagram-gradient)" style="filter:drop-shadow(0 2px 4px rgba(225,48,108,0.3));">
+            <defs>
+              <linearGradient id="instagram-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#f09433;stop-opacity:1" />
+                <stop offset="25%" style="stop-color:#e6683c;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#dc2743;stop-opacity:1" />
+                <stop offset="75%" style="stop-color:#cc2366;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#bc1888;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/company/datapolis-investiga/" target="_blank" title="LinkedIn" style="display:flex;align-items:center;transition:transform 0.2s;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#0077B5" style="filter:drop-shadow(0 2px 4px rgba(0,119,181,0.3));">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+        <a href="https://www.tiktok.com/@datapolis_investiga" target="_blank" title="TikTok" style="display:flex;align-items:center;transition:transform 0.2s;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#000" style="filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
+            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+          </svg>
+        </a>
+        <a href="https://whatsapp.com/channel/0029Vb6BNEfKGGGI82MSx51M" target="_blank" title="WhatsApp" style="display:flex;align-items:center;transition:transform 0.2s;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#25D366" style="filter:drop-shadow(0 2px 4px rgba(37,211,102,0.3));">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+          </svg>
+        </a>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Menú hamburguesa lateral -->
+  <div id="side-menu" class="side-menu">
+    <button id="close-menu" class="close-menu">&times;</button>
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#quienes">Quiénes Somos</a></li>
+      <li><a href="#investigaciones">Investigaciones</a></li>
+      <li><a href="#equipo">Equipo</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="investigacion-impacto.html">Impacto educación cívica</a></li>
+      <li><a href="investigacion-participacion.html">Participación joven</a></li>
+    </ul>
+  </div>
+  <button id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menú">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+ 
+  <!-- Hero Section -->
+<section id="inicio" class="hero" style="background: linear-gradient(135deg, #0a192f 0%, #112240 100%); padding: 6rem 0; position: relative; overflow: hidden;">
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80') center/cover; opacity: 0.08;"></div>
+  
+  <div class="container" style="position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+    
+    <!-- Grid principal: texto a la izquierda, video a la derecha -->
+    <div style="display: grid; grid-template-columns: 1fr 420px; gap: 4rem; align-items: start;">
+      
+      <!-- Columna Izquierda: Todo el contenido -->
+      <div>
+        <h1 style="font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 2rem; color: #FFD700; text-shadow: 0 4px 20px rgba(255,215,0,0.3);">
+          Investigación y Consciencia para el Perú
+        </h1>
+        
+        <div style="background: rgba(255, 215, 0, 0.05); border: 2px solid rgba(255, 215, 0, 0.3); padding: 2.5rem; border-radius: 15px; backdrop-filter: blur(10px); margin-bottom: 3rem;">
+          <p style="font-size: 1.2rem; line-height: 1.9; color: #ccd6f6; margin-bottom: 1.5rem;">
+            En <strong style="color: #FFD700;">DataPolis</strong> somos un colectivo de investigación y concientización social y económica, dedicado a impulsar el conocimiento y la reflexión crítica en el Perú.
+          </p>
+          <p style="font-size: 1.15rem; line-height: 1.8; color: #a8b2d1;">
+            Combinamos análisis de datos, investigación científica y comunicación accesible para explicar los fenómenos que afectan la vida de los peruanos, promoviendo el pensamiento crítico y la participación ciudadana informada.
+          </p>
+        </div>
+
+        <!-- Tarjetas 2x2 -->
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 3rem;">
+          <!-- Sociedad -->
+          <div style="background: rgba(10, 25, 47, 0.6); border: 2px solid #FFD700; border-radius: 15px; padding: 1.5rem; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+            <h3 style="color: #FFD700; font-size: 1.3rem; margin-bottom: 1rem; font-weight: 700;">Sociedad y Desarrollo Humano</h3>
+            <p style="color: #ccd6f6; line-height: 1.6; font-size: 1rem;">Analizamos dinámicas sociales, desigualdad y bienestar colectivo para entender mejor nuestra realidad.</p>
+          </div>
+
+          <!-- Economía -->
+          <div style="background: rgba(10, 25, 47, 0.6); border: 2px solid #FFD700; border-radius: 15px; padding: 1.5rem; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+            <h3 style="color: #FFD700; font-size: 1.3rem; margin-bottom: 1rem; font-weight: 700;">Economía y Política Pública</h3>
+            <p style="color: #ccd6f6; line-height: 1.6; font-size: 1rem;">Investigamos políticas económicas y su impacto en la sociedad con rigor científico.</p>
+          </div>
+
+          <!-- Cultura -->
+          <div style="background: rgba(10, 25, 47, 0.6); border: 2px solid #FFD700; border-radius: 15px; padding: 1.5rem; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+            <h3 style="color: #FFD700; font-size: 1.3rem; margin-bottom: 1rem; font-weight: 700;">Cultura y Ciudadanía Peruana</h3>
+            <p style="color: #ccd6f6; line-height: 1.6; font-size: 1rem;">Fortalecemos la identidad nacional y promovemos la participación ciudadana activa.</p>
+          </div>
+
+          <!-- Espacio vacío para equilibrar el grid (opcional, queda más simétrico) -->
+          <div></div>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: VIDEO FIJO A LA DERECHA -->
+      <div style="position: sticky; top: 100px; align-self: start;">
+        <div style="background: rgba(10, 25, 47, 0.8); border: 2px solid #FFD700; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);">
+          <video id="sideVideo" controls style="width: 100%; height: auto; display: block;" poster="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80">
+            <source src="Videos/Data.mp4" type="video/mp4">
+            Tu navegador no soporta video.
+          </video>
+        </div>
+        
+        <div style="text-align: center; margin-top: 1rem;">
+          <span style="color: #FFD700; font-size: 0.9rem; font-weight: 600; background: rgba(255, 215, 0, 0.15); padding: 6px 16px; border-radius: 20px; border: 1px solid rgba(255,215,0,0.3);">
+            ▶ Video Destacado
+          </span>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Compromiso Expandido (debajo del grid) -->
+    <div style="max-width: 900px; margin: 5rem auto 0; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%); border: 2px solid #FFD700; border-radius: 20px; padding: 3rem; text-align: center; box-shadow: 0 10px 40px rgba(255, 215, 0, 0.2);">
+      <h3 style="color: #FFD700; font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 700;">Nuestro Compromiso</h3>
+      <p style="color: #ccd6f6; font-size: 1.15rem; line-height: 1.9;">
+        Desarrollamos investigaciones que no solo explican fenómenos sociales, sino que también <strong style="color: #FFD700;">proponen soluciones concretas</strong> para contribuir al bienestar colectivo y construir un futuro más <strong style="color: #FFD700;">sostenible, justo e inclusivo</strong> para todos los peruanos.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- RESPONSIVE: En móviles el video va debajo -->
+<style>
+  @media (max-width: 1024px) {
+    .hero .container > div[style*="grid-template-columns"] {
+      grid-template-columns: 1fr !important;
+    }
+    .hero [style*="position: sticky"] {
+      position: static !important;
+      margin-top: 3rem;
+    }
+  }
+  
+  /* Hover effect en tarjetas */
+  .hero [style*="border: 2px solid #FFD700"]:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(255, 215, 0, 0.25);
+  }
+</style>
+
+
+  <!-- Quiénes Somos (Información Institucional) -->
+  <section id="quienes" class="section" style="background: #f8f9fa; padding: 5rem 0;">
+    <div class="container">
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <h2 class="section-title" style="color: #0a192f; font-size: 2.5rem; margin-bottom: 2rem;">Sobre DataPolis</h2>
+        <p style="font-size: 1.1rem; line-height: 1.8; color: #4a5568; margin-bottom: 1.5rem;">
+          Fundada en 2025 en la <strong>Facultad de Ciencias Económicas de la Universidad Nacional Mayor de San Marcos (UNMSM)</strong>, somos una organización sin fines de lucro dedicada a la elaboración de estudios, reportes e investigaciones para informar y educar.
+        </p>
+        <div style="background: linear-gradient(90deg, #FFD700, #FFA500); padding: 1.5rem; border-radius: 15px; margin-top: 2rem;">
+          <p style="color: #0a192f; font-size: 1.15rem; font-weight: 700; margin: 0;">
+            En 2025 obtuvimos la certificación de <strong>SENAJU</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proyectos & Actividades -->
+<section id="proyectos" class="section" style="position: relative; overflow: hidden; padding: 6rem 0; background: linear-gradient(135deg, rgba(10, 25, 47, 0.97) 0%, rgba(17, 34, 64, 0.97) 100%), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&q=80') center/cover no-repeat fixed;">
+  <!-- Peruvian Pattern Overlay -->
+  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1; background-image: url('data:image/svg+xml;utf8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M0%200h50v50H0z%22%20fill%3D%22%23D4AF37%22%20opacity%3D%220.05%22%2F%3E%3Cpath%20d%3D%22M50%200h50v50H50z%22%20fill%3D%22%23D22B2B%22%20opacity%3D%220.05%22%2F%3E%3Cpath%20d%3D%22M0%2050h50v50H0z%22%20fill%3D%22%23D22B2B%22%20opacity%3D%220.05%22%2F%3E%3Cpath%20d%3D%22M50%2050h50v50H50z%22%20fill%3D%22%23D4AF37%22%20opacity%3D%220.05%22%2F%3E%3C%2Fsvg%3E');"></div>
+  
+  <!-- Decorative Elements -->
+  <div class="peru-decorative-1" style="position: absolute; top: 10%; left: 5%; width: 120px; height: 120px; opacity: 0.1; z-index: 1; background-image: url('data:image/svg+xml;utf8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22%23D4AF37%22%20stroke-width%3D%222%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2230%22%20fill%3D%22none%22%20stroke%3D%22%23D22B2B%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E'); background-size: contain; background-repeat: no-repeat; animation: float 8s ease-in-out infinite;"></div>
+  <div class="peru-decorative-2" style="position: absolute; bottom: 10%; right: 5%; width: 120px; height: 120px; opacity: 0.1; z-index: 1; background-image: url('data:image/svg+xml;utf8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20x%3D%2230%22%20y%3D%2230%22%20width%3D%2240%22%20height%3D%2240%22%20fill%3D%22none%22%20stroke%3D%22%23D4AF37%22%20stroke-width%3D%222%22%20transform%3D%22rotate(45%2050%2050)%22%2F%3E%3C%2Fsvg%3E'); background-size: contain; background-repeat: no-repeat; animation: float 8s ease-in-out infinite 0.5s; animation-direction: reverse;"></div>
+  
+  <div class="container" style="position: relative; z-index: 2;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2 class="section-title" style="color: #FFD700; font-size: 2.8rem; margin-bottom: 1rem; position: relative; display: inline-block;">
+        Proyectos & Actividades
+        <span style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background: #FFD700; border-radius: 2px;"></span>
+      </h2>
+      <p class="section-subtitle" style="color: #ccd6f6; font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Nuestras iniciativas para promover el pensamiento crítico y la educación cívica</p>
+    </div>
+    
+    <div id="proyectos-slider" style="max-width: 1100px; margin: 0 auto; position: relative; padding: 20px 0;">
+      <button id="prev-proyecto" class="slider-arrow slider-arrow-left">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <div id="proyectos-cards" style="display:flex;gap:28px;justify-content:center;align-items:stretch;min-height:320px;transition:all 0.4s;">
+        <!-- Tarjetas de proyectos aquí -->
+      </div>
+      <button id="next-proyecto" class="slider-arrow slider-arrow-right">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+<script>
+const proyectos = [
+  {
+    titulo: "Charlas en colegios",
+    desc: "Espacios de diálogo y pensamiento crítico para estudiantes de secundaria.",
+    img: "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    titulo: "Quizzes educativos",
+    desc: "Juegos interactivos para aprender sobre economía y ciudadanía.",
+    img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    titulo: "Serie de videos",
+    desc: "Videos cortos para redes con explicaciones sencillas de temas complejos.",
+    img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    titulo: "Resolución y demostración de teoremas",
+    desc: "Explicaciones y ejercicios prácticos sobre modelos económicos.",
+    img: "https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    titulo: "Concientización social",
+    desc: "Espacios para que los alumnos compartan sus opiniones y análisis.",
+    img: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    titulo: "Entrevistas y consejos",
+    desc: "Conversaciones con expertos y orientación para estudiantes.",
+    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    titulo: "Investigaciones públicas",
+    desc: "Informes y columnas de opinión para medios y público en general.",
+    img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    titulo: "Material académico relevante",
+    desc: "Difusión de recursos y materiales útiles para la comunidad.",
+    img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80"
+  }
+];
+
+let idx = 0;
+function renderProyectos() {
+  const cards = document.getElementById('proyectos-cards');
+  cards.innerHTML = '';
+  for (let i = 0; i < 3; i++) {
+    const p = proyectos[(idx + i) % proyectos.length];
+    const card = document.createElement('div');
+    card.style.background = '#0b0b0b';
+    card.style.border = '2px solid #ffdd00';
+    card.style.borderRadius = '18px';
+    card.style.padding = '28px 18px';
+    card.style.color = '#fff';
+    card.style.textAlign = 'center';
+    card.style.flex = '1 1 0';
+    card.style.display = 'flex';
+    card.style.flexDirection = 'column';
+    card.style.alignItems = 'center';
+    card.style.justifyContent = 'center';
+    card.style.boxShadow = '0 8px 32px rgba(0,0,0,0.18)';
+    card.style.transition = 'transform 0.3s';
+    card.innerHTML = `
+      <img src="${p.img}" alt="${p.titulo}" style="width:120px;height:120px;object-fit:cover;border-radius:12px;margin-bottom:18px;">
+      <h3 style="color:#ffdd00;font-size:1.18rem;margin-bottom:10px;">${p.titulo}</h3>
+      <p style="color:#fff;font-size:1rem;">${p.desc}</p>
+    `;
+    cards.appendChild(card);
+  }
+}
+document.getElementById('prev-proyecto').onclick = function() {
+  idx = (idx - 1 + proyectos.length) % proyectos.length;
+  renderProyectos();
+};
+document.getElementById('next-proyecto').onclick = function() {
+  idx = (idx + 1) % proyectos.length;
+  renderProyectos();
+};
+renderProyectos();
+</script>
+
+  <!-- Investigaciones -->
+<section id="investigaciones" class="section" style="background-color: #333;">
+  <div class="container">
+    <h2 class="section-title" style="color:var(--white);">Investigaciones</h2>
+    <p class="section-subtitle" style="color:#ccc;">Análisis y estudios realizados por Datapolis</p>
+    <div class="projects-grid">
+      <div class="investigation-card fade-in">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&q=80&w=500" alt="Investigación 1">
+        </div>
+        <div class="project-content">
+          <h3>Impacto de la educación cívica</h3>
+          <p>Estudio sobre el efecto de talleres en colegios públicos de Lima.</p>
+          <a href="investigacion-impacto.html" class="btn" target="_blank">Ver Investigación</a>
+        </div>
+      </div>
+      <div class="investigation-card fade-in delay-1">
+        <div class="project-image">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=500" alt="Investigación 2">
+        </div>
+        <div class="project-content">
+          <h3>Participación ciudadana joven</h3>
+          <p>Análisis de encuestas sobre participación política en jóvenes peruanos.</p>
+          <a href="investigacion-participacion.html" class="btn" target="_blank">Ver Investigación</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- SECCIÓN EQUIPO - VERSIÓN FINAL 100% CORREGIDA -->
+<section id="equipo" class="team-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span class="gradient-text">Nuestro Equipo</span>
+      </h2>
+      <p class="section-subtitle">
+        Un grupo de mentes brillantes unidas por la pasión de transformar datos en soluciones reales
+      </p>
+    </div>
+
+    <div class="team-grid">
+
+      <!-- 1. RAQUEL -->
+      <article class="team-card">
+        <div class="img-wrapper">
+          <img src="Imagens/Raquel.jpg" alt="Raquel Pineda Huamán" loading="lazy">
+        </div>
+        <h3 class="name">Raquel Pineda Huamán</h3>
+        <p class="role">Miembro del Equipo</p>
+        <p class="bio">Apasionada por la gestión de proyectos y el impacto social a través de la tecnología.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/raquel-pineda-huaman/" target="_blank" class="social-btn linkedin-btn" aria-label="LinkedIn Raquel">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="white">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 2. JENNIFER -->
+      <article class="team-card">
+        <div class="img-wrapper">
+          <img src="Imagens/Jennifer.jpg" alt="Jennifer León Silencio" loading="lazy">
+        </div>
+        <h3 class="name">Jennifer León Silencio</h3>
+        <p class="role">Miembro del Equipo</p>
+        <p class="bio">Maestra en construir alianzas estratégicas que potencian el alcance de cada proyecto.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/rebeca-leon-b26253349/" target="_blank" class="social-btn linkedin-btn" aria-label="LinkedIn Jennifer">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="white">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 3. MARVI -->
+      <article class="team-card">
+        <div class="img-wrapper">
+          <img src="Imagens/Marvi.jpg" alt="Marvi Franco Jones" loading="lazy">
+        </div>
+        <h3 class="name">Marvi Franco Jones</h3>
+        <p class="role">Miembro del Equipo</p>
+        <p class="bio">Especialista en investigación aplicada y desarrollo de modelos predictivos innovadores.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/marvi-yovani-franco-jones/" target="_blank" class="social-btn linkedin-btn" aria-label="LinkedIn Marvi">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="white">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 4. QUEEN -->
+      <article class="team-card">
+        <div class="img-wrapper">
+          <img src="Imagens/Queen.jpg" alt="Queen Elizabeth Machao Tello" loading="lazy">
+        </div>
+        <h3 class="name">Queen Elizabeth Machao Tello</h3>
+        <p class="role">Miembro del Equipo</p>
+        <p class="bio">Desarrolladora full-stack con ojo clínico para interfaces intuitivas y código limpio.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/queen-elizabeth-machao-tello" target="_blank" class="social-btn linkedin-btn" aria-label="LinkedIn Queen">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="white">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 5. JOAQUIN -->
+      <article class="team-card">
+        <div class="img-wrapper">
+          <img src="Imagens/joaquin.png" alt="Joaquin Ulloa Camero" loading="lazy">
+        </div>
+        <h3 class="name">Joaquin Ulloa Camero</h3>
+        <p class="role">Miembro del Equipo</p>
+        <p class="bio">Innovador incansable que transforma ideas complejas en soluciones técnicas brillantes.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/3a0546315/" target="_blank" class="social-btn linkedin-btn" aria-label="LinkedIn Joaquin">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="white">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 6. PIERO -->
+      <article class="team-card">
+        <div class="img-wrapper">
+          <img src="Imagens/Alex.jpg" alt="Piero Alex Simeón" loading="lazy">
+        </div>
+        <h3 class="name">Piero Alex Simeón</h3>
+        <p class="role">Miembro del Equipo</p>
+        <p class="bio">Experto en análisis estadístico avanzado y visualización de datos complejos.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/piero-alexander-simeon-bustillos-1b9a79294/" target="_blank" class="social-btn linkedin-btn" aria-label="LinkedIn Piero">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="white">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 7. SANDRA -->
+      <article class="team-card">
+        <div class="img-wrapper">
+          <img src="Imagens/Sandra.jpeg" alt="Sandra De La Cruz Moreno" loading="lazy">
+        </div>
+        <h3 class="name">Sandra De La Cruz Moreno</h3>
+        <p class="role">Miembro del Equipo</p>
+        <p class="bio">Coordinadora nata con talento para alinear equipos y entregar resultados impecables.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/sandra-de-la-cruz-moreno-0b7a00294/" target="_blank" class="social-btn linkedin-btn" aria-label="LinkedIn Sandra">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="white">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 8. ADRIAN -->
+      <article class="team-card">
+        <div class="img-wrapper">
+          <img src="Imagens/Adrian.jpeg" alt="Adrian Bohorquez" loading="lazy">
+        </div>
+        <h3 class="name">Adrian Bohorquez</h3>
+        <p class="role">Miembro del Equipo</p>
+        <p class="bio">Pionero en innovación tecnológica, siempre un paso adelante en tendencias y herramientas.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/adrianbohorquez/" target="_blank" class="social-btn linkedin-btn" aria-label="LinkedIn Adrian">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="white">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 9. JAIR -->
+      <article class="team-card">
+        <div class="img-wrapper">
+          <img src="https://via.placeholder.com/200x200/2563eb/ffffff?text=JR" alt="Jair Rebatta" loading="lazy">
+        </div>
+        <h3 class="name">Jair Rebatta</h3>
+        <p class="role">Miembro del Equipo</p>
+        <p class="bio">Estratega digital que convierte objetivos ambiciosos en planes de acción ganadores.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/rebatta/" target="_blank" class="social-btn linkedin-btn" aria-label="LinkedIn Jair">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="white">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+   
+
+
+
+  
+            
+          
+<!-- Sección de Contacto - Versión Premium Simplificada -->
+<section id="contacto" class="contact-section">
+    <div class="contact-container">
+        
+        <!-- Encabezado Mejorado -->
+        <div class="contact-header">
+            <h2 class="contact-title">Contáctanos</h2>
+            <div class="title-decoration">
+                <div class="gold-bar"></div>
+                <div class="gold-bar"></div>
+            </div>
+            <p class="contact-subtitle">
+                ¿Quieres colaborar o invitar a Datapolis a tu institución? 
+                <span class="highlight-gold">Escríbenos, estaremos encantados de escucharte.</span>
+            </p>
+        </div>
+
+        <!-- Contenido Principal -->
+        <div class="contact-content">
+            
+            <!-- Información de Contacto -->
+            <div class="contact-info">
+                
+                <!-- Tarjeta de Email -->
+                <div class="contact-card">
+                    <div class="card-icon">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Correo Electrónico</h3>
+                        <div class="contact-links">
+                            <a href="mailto:equipo.datapolis@gmail.com" class="contact-link">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>equipo.datapolis@gmail.com</span>
+                            </a>
+                            <a href="mailto:coordinacion.datapolis@gmail.com" class="contact-link">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>coordinacion.datapolis@gmail.com</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Ubicación -->
+                <div class="contact-card">
+                    <div class="card-icon">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Ubicación</h3>
+                        <div class="location-info">
+                            <div class="location-main">
+                                <i class="fas fa-flag"></i>
+                                <span>Lima, Perú</span>
+                            </div>
+                            <div class="location-badge">
+                                <span class="badge-icon">🌎</span>
+                                <span class="badge-text">Desde el Perú para el mundo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+          
+            </div>
+
+            <!-- Formulario de Contacto -->
+            <div class="contact-form">
+                <div class="form-header">
+                    <h3 class="form-title">Envía Tu Mensaje</h3>
+                    <p class="form-subtitle">Te responderemos en menos de 24 horas</p>
+                </div>
+                
+                <form id="contactForm" class="contact-form-elements">
+                    
+                    <!-- Campo Nombre -->
+                    <div class="form-group">
+                        <div class="input-container">
+                            <input type="text" id="nombre" name="nombre" class="form-input" required>
+                            <label for="nombre" class="form-label">
+                                <i class="fas fa-user"></i>
+                                Nombre completo
+                            </label>
+                            <div class="input-highlight"></div>
+                        </div>
+                    </div>
+
+                    <!-- Campo Email -->
+                    <div class="form-group">
+                        <div class="input-container">
+                            <input type="email" id="email" name="email" class="form-input" required>
+                            <label for="email" class="form-label">
+                                <i class="fas fa-envelope"></i>
+                                Correo electrónico
+                            </label>
+                            <div class="input-highlight"></div>
+                        </div>
+                    </div>
+
+                    <!-- Campo Asunto -->
+                    <div class="form-group">
+                        <div class="input-container">
+                            <input type="text" id="asunto" name="asunto" class="form-input">
+                            <label for="asunto" class="form-label">
+                                <i class="fas fa-tag"></i>
+                                Asunto (opcional)
+                            </label>
+                            <div class="input-highlight"></div>
+                        </div>
+                    </div>
+
+                    <!-- Campo Mensaje -->
+                    <div class="form-group">
+                        <div class="textarea-container">
+                            <label for="mensaje" class="textarea-label">
+                                <i class="fas fa-comment"></i>
+                                Tu mensaje
+                            </label>
+                            <textarea id="mensaje" name="mensaje" rows="5" 
+                                      placeholder="Cuéntanos en qué podemos colaborar..." 
+                                      class="form-textarea" required></textarea>
+                            <div class="textarea-footer">
+                                <div class="char-counter">
+                                    <span class="current-chars">0</span>
+                                    <span class="max-chars">/500 caracteres</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Acciones del Formulario - VERSIÓN PRO 2025 -->
+<div class="form-actions">
+  <!-- Botón con brillo animado + hover 3D -->
+
+
+
+  <!-- BOTÓN ENVIAR + SEGURIDAD - VERSIÓN FINAL PRO 2025 -->
+<div class="form-actions">
+  
+  <!-- Botón centrado con brillo premium -->
+  <div class="btn-wrapper">
+    <button type="submit" class="submit-btn">
+      <span class="btn-content">
+        <span class="btn-text">Enviar Mensaje</span>
+        <span class="btn-icon">
+          <!-- Avión estilo premium (más grande y elegante) -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+               stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 2L2 12.5L10.5 15L13 21L21 2Z"/>
+            <path d="M10.5 15L13.5 21"/>
+            <path d="M2 12.5L10.5 15"/>
+          </svg>
+        </span>
+      </span>
+      <div class="shine"></div>
+    </button>
+  </div>
+
+  <!-- Seguridad minimalista y elegante -->
+  <div class="security-note">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <path d="M9 12l2 2 4-4"/>
+    </svg>
+    <span>Tus datos están protegidos y encriptados</span>
+  </div>
+</div>
+
+
+        </div>
+
+     
+</section>
+
+
+
+    
+<!-- Elementos decorativos flotantes -->
+<div class="floating-elements">
+    <div class="floating-element element-1"></div>
+    <div class="floating-element element-2"></div>
+</div>
+
+
+
+
+
+  <!-- Nuestros aliados -->
+<section class="aliados-section">
+  <div class="container">
+    <h3 class="aliados-title">Nuestros aliados</h3>
+    <div class="aliados-logos">
+      <a href="https://www.gob.pe/inei" target="_blank" class="aliado-card">
+        <img src="Colegios/inei.png" alt="INEI">
+      </a>
+      <a href="https://www.gob.pe/senaju" target="_blank" class="aliado-card">
+        <img src="Colegios/senaju.png" alt="SENAJU">
+      </a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Enhanced Publications Section -->
+  <section id="publicaciones" class="section" style="background-color: var(--color-navy-deep); padding: 4rem 0;">
+    <div class="container">
+      <h2 class="section-title" style="color: var(--color-slate-lightest);">Publicaciones</h2>
+      <p class="section-subtitle" style="color: var(--color-slate-base);">Nuestros documentos de investigación</p>
+      
+      <div class="publications-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
+        <!-- PDF documents will be added here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced JavaScript -->
+  <script>
+    // Scroll animations
+    document.addEventListener('DOMContentLoaded', () => {
+      const animateOnScroll = () => {
+        document.querySelectorAll('[data-animation]').forEach(el => {
+          if (isInViewport(el)) {
+            el.classList.add('is-visible');
+          }
+        });
+      };
+      
+      window.addEventListener('scroll', animateOnScroll);
+      animateOnScroll(); // Initial check
+    });
+    
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.bottom >= 0
+      );
+    }
+  </script>
+
+  <!-- Quantum Systems Container -->
+  <div id="quantum-container">
+    <!-- Portal will be inserted here -->
+    <!-- Neural interface will be inserted here -->
+    <!-- Temporal display will be inserted here -->
+  </div>
+
+<!-- REDES SOCIALES -->
+<section id="redes-sociales" class="quantum-social" data-scroll-section 
+  style="background: linear-gradient(135deg, #0a192f 0%, #112240 100%); padding: 5rem 0;">
+  
+  <div class="section-container">
+    <!-- Título -->
+    <div class="social-header" style="text-align: center; margin-bottom: 3rem;">
+      <h2 class="section-title quantum-text" data-scroll-reveal="fadeUp" 
+          style="color: #FFD700; font-size: 2.5rem; margin-bottom: 1rem;">
+        Síguenos en Redes Sociales
+      </h2>
+      <p class="section-subtitle" data-scroll-reveal="fadeUp" data-scroll-delay="200" 
+         style="font-size: 1.1rem; color: #ccd6f6; max-width: 700px; margin: 0 auto;">
+        Mantente conectado con <strong>DataPolis</strong> y únete a nuestra comunidad digital.
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="social-grid" 
+      style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+             gap: 2rem; max-width: 1100px; margin: 0 auto;">
+
+      <!-- TARJETA - YOUTUBE -->
+      <div class="social-card" data-scroll-reveal="fadeUp"
+           style="background: rgba(255,0,0,0.06); border: 1px solid rgba(255,0,0,0.25);
+                  border-radius: 20px; padding: 2rem; text-align: center; 
+                  box-shadow: 0 4px 15px rgba(255,0,0,0.1); transition: transform 0.3s ease;">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" 
+             alt="YouTube" width="60" height="60" style="margin-bottom: 1rem; filter: drop-shadow(0 2px 6px rgba(255,0,0,0.4));">
+        <h3 style="color: #FF0000; font-size: 1.3rem;">YouTube</h3>
+        <p style="color: #a8b2d1; margin: 0.8rem 0 1.5rem;">Contenido educativo sobre economía y sociedad</p>
+        <a href="https://youtube.com/@datapolis-y3v?si=7fYTIVnSGywhjXhm" target="_blank"
+           style="background: #FF0000; color: #fff; padding: 0.7rem 1.5rem; border-radius: 10px; 
+                  display: inline-block; font-weight: 600;">Suscribirse</a>
+      </div>
+
+      <!-- TARJETA - INSTAGRAM -->
+      <div class="social-card" data-scroll-reveal="fadeUp" data-scroll-delay="100"
+           style="background: rgba(225,48,108,0.06); border: 1px solid rgba(225,48,108,0.25); 
+                  border-radius: 20px; padding: 2rem; text-align: center;
+                  box-shadow: 0 4px 15px rgba(225,48,108,0.1); transition: transform 0.3s ease;">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
+             alt="Instagram" width="60" height="60" 
+             style="margin-bottom: 1rem; filter: drop-shadow(0 2px 6px rgba(225,48,108,0.4));">
+        <h3 style="color: #E1306C; font-size: 1.3rem;">Instagram</h3>
+        <p style="color: #a8b2d1; margin: 0.8rem 0 1.5rem;">Infografías y contenido visual</p>
+        <a href="https://www.instagram.com/datapolisinvestiga" target="_blank"
+           style="background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); 
+                  color: #fff; padding: 0.7rem 1.5rem; border-radius: 10px; font-weight: 600;">
+          Seguir
+        </a>
+      </div>
+
+      <!-- TARJETA - LINKEDIN -->
+      <div class="social-card" data-scroll-reveal="fadeUp" data-scroll-delay="200"
+           style="background: rgba(0,119,181,0.06); border: 1px solid rgba(0,119,181,0.25); 
+                  border-radius: 20px; padding: 2rem; text-align: center;
+                  box-shadow: 0 4px 15px rgba(0,119,181,0.1); transition: transform 0.3s ease;">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg"
+             alt="LinkedIn" width="60" height="60" 
+             style="margin-bottom: 1rem; filter: drop-shadow(0 2px 6px rgba(0,119,181,0.4));">
+        <h3 style="color: #0077B5; font-size: 1.3rem;">LinkedIn</h3>
+        <p style="color: #a8b2d1; margin: 0.8rem 0 1.5rem;">Networking profesional</p>
+        <a href="https://www.linkedin.com/company/datapolis-investiga/" target="_blank"
+           style="background: #0077B5; color: #fff; padding: 0.7rem 1.5rem; border-radius: 10px; font-weight: 600;">
+          Conectar
+        </a>
+      </div>
+
+      <!-- TARJETA - TIKTOK -->
+      <div class="social-card" data-scroll-reveal="fadeUp" data-scroll-delay="300"
+           style="background: rgba(0,0,0,0.06); border: 1px solid rgba(255,255,255,0.25);
+                  border-radius: 20px; padding: 2rem; text-align: center;
+                  box-shadow: 0 4px 15px rgba(255,255,255,0.05); transition: transform 0.3s ease;">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg"
+             alt="TikTok" width="60" height="60" 
+             style="margin-bottom: 1rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));">
+        <h3 style="color: #00f2ea; font-size: 1.3rem;">TikTok</h3>
+        <p style="color: #a8b2d1; margin: 0.8rem 0 1.5rem;">Videos cortos educativos</p>
+        <a href="https://www.tiktok.com/@datapolis_investiga" target="_blank"
+           style="background: #000; color: #00f2ea; padding: 0.7rem 1.5rem; border-radius: 10px; font-weight: 600;">
+          Seguir
+        </a>
+      </div>
+
+      <!-- TARJETA - WHATSAPP -->
+      <div class="social-card" data-scroll-reveal="fadeUp" data-scroll-delay="400"
+           style="background: rgba(37,211,102,0.06); border: 1px solid rgba(37,211,102,0.25);
+                  border-radius: 20px; padding: 2rem; text-align: center;
+                  box-shadow: 0 4px 15px rgba(37,211,102,0.1); transition: transform 0.3s ease;">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"
+             alt="WhatsApp" width="60" height="60" 
+             style="margin-bottom: 1rem; filter: drop-shadow(0 2px 6px rgba(37,211,102,0.4));">
+        <h3 style="color: #25D366; font-size: 1.3rem;">WhatsApp</h3>
+        <p style="color: #a8b2d1; margin: 0.8rem 0 1.5rem;">Comunidad y actualizaciones</p>
+        <a href="https://whatsapp.com/channel/0029Vb6BNEfKGGGI82MSx51M" target="_blank"
+           style="background: #25D366; color: #fff; padding: 0.7rem 1.5rem; border-radius: 10px; font-weight: 600;">
+          Unirse
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+</section>
+
+<!-- EFECTO HOVER GLOBAL -->
+<style>
+  .social-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+<!-- FOOTER PROFESIONAL DATAPOLIS -->
+<footer style="background: linear-gradient(135deg, #0b0b0b 0%, #1a1a1a 100%); color: #fff; padding: 4rem 0 2rem; margin-top: 6rem; border-top: 2px solid #FFD700;">
+  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+    
+    <!-- GRID PRINCIPAL 4 COLUMNAS -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+      
+      <!-- Columna 1: Marca -->
+      <div>
+        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #FFD700; font-weight: 700;">Datapolis</h3>
+        <p style="color: #ccc; line-height: 1.8; font-size: 0.95rem;">
+          Investigación y consciencia para transformar el Perú. Promovemos pensamiento crítico a través de datos, educación cívica y análisis social.
+        </p>
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+          <a href="https://www.instagram.com/datapolisinvestiga" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: #FFD700; color: #0b0b0b; border-radius: 50%; transition: transform 0.3s ease;" title="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@datapolis_investiga" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: #FFD700; color: #0b0b0b; border-radius: 50%; transition: transform 0.3s ease;" title="TikTok">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/datapolis-investiga/" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: #FFD700; color: #0b0b0b; border-radius: 50%; transition: transform 0.3s ease;" title="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@datapolis-y3v" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: #FFD700; color: #0b0b0b; border-radius: 50%; transition: transform 0.3s ease;" title="YouTube">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna 2: Menú -->
+      <div>
+        <h4 style="font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 700; color: #FFD700;">Navegación</h4>
+        <ul style="list-style: none;">
+          <li style="margin-bottom: 0.8rem;"><a href="#inicio" style="color: #ccc; text-decoration: none; transition: color 0.3s ease;">→ Inicio</a></li>
+          <li style="margin-bottom: 0.8rem;"><a href="#quienes" style="color: #ccc; text-decoration: none; transition: color 0.3s ease;">→ Quiénes Somos</a></li>
+          <li style="margin-bottom: 0.8rem;"><a href="#investigaciones" style="color: #ccc; text-decoration: none; transition: color 0.3s ease;">→ Investigaciones</a></li>
+          <li style="margin-bottom: 0.8rem;"><a href="#equipo" style="color: #ccc; text-decoration: none; transition: color 0.3s ease;">→ Equipo</a></li>
+          <li><a href="#contacto" style="color: #ccc; text-decoration: none; transition: color 0.3s ease;">→ Contacto</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Investigaciones -->
+      <div>
+        <h4 style="font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 700; color: #FFD700;">Investigaciones</h4>
+        <ul style="list-style: none;">
+          <li style="margin-bottom: 0.8rem;"><a href="investigacion-impacto.html" style="color: #ccc; text-decoration: none; transition: color 0.3s ease;">→ Impacto Educación Cívica</a></li>
+          <li style="margin-bottom: 0.8rem;"><a href="investigacion-participacion.html" style="color: #ccc; text-decoration: none; transition: color 0.3s ease;">→ Participación Ciudadana Joven</a></li>
+          <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #ccc; text-decoration: none; transition: color 0.3s ease;">→ Series de datos</a></li>
+          <li><a href="#" style="color: #ccc; text-decoration: none; transition: color 0.3s ease;">→ Metodología</a></li>
+        </ul>
+      </div>
+
+
+    <!-- DIVISOR DORADO -->
+    <div style="height: 2px; background: linear-gradient(90deg, transparent, #FFD700, transparent); margin: 3rem auto; max-width: 200px;"></div>
+
+    <!-- COPYRIGHT Y CRÉDITOS -->
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 1rem; padding-top: 1.5rem;">
+      <p style="color: #999; font-size: 0.9rem;">
+        © 2025 <span style="color: #FFD700; font-weight: 700;">Datapolis</span> — Todos los derechos reservados
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
+
+
+  
+
+  <script>
+    // Navegación y scroll
+    const header = document.getElementById('header');
+    const hamburger = document.querySelector('header .hamburger');
+    const headerNavMenu = document.querySelector('header .nav-menu');
+    const quantumNavMenu = document.getElementById('navMenu');
+    const navToggle = document.getElementById('navToggle');
+    const sideMenu = document.getElementById('side-menu');
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const closeMenu = document.getElementById('close-menu');
+
+    if (hamburger && headerNavMenu) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        headerNavMenu.classList.toggle('active');
+      });
+    }
+
+    if (headerNavMenu && hamburger) {
+      headerNavMenu.addEventListener('click', () => {
+        headerNavMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    }
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Abrir y cerrar menú lateral
+    hamburgerBtn && hamburgerBtn.addEventListener('click', () => {
+      sideMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+    closeMenu && closeMenu.addEventListener('click', () => {
+      sideMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+    window.addEventListener('click', function(e) {
+      if (e.target === sideMenu) {
+        sideMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Asegurar que el menú lateral esté cerrado al cargar y al cambiar tamaño
+    window.addEventListener('load', () => {
+      sideMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+    window.addEventListener('resize', () => {
+      sideMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+
+    // Cerrar menú al hacer clic en cualquier enlace del menú lateral
+    sideMenu.addEventListener('click', (e) => {
+      const target = e.target;
+      if (target && (target.tagName === 'A' || target.closest('a'))) {
+        sideMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Cerrar con tecla Escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        sideMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Auto-cerrar si la pantalla supera 900px
+    const mq = window.matchMedia('(max-width: 900px)');
+    const syncSideMenu = () => {
+      if (!mq.matches) {
+        sideMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    };
+    mq.addEventListener ? mq.addEventListener('change', syncSideMenu) : mq.addListener(syncSideMenu);
+    syncSideMenu();
+
+    // Modal
+    const modal = document.getElementById('modal');
+    const modalClose = document.getElementById('modal-close');
+    const modalImg = document.getElementById('modal-img');
+    const modalName = document.getElementById('modal-name');
+    const modalRole = document.getElementById('modal-role');
+    const modalEmail = document.getElementById('modal-email');
+    const modalBday = document.getElementById('modal-bday');
+    const modalPhone = document.getElementById('modal-phone');
+    const modalDni = document.getElementById('modal-dni');
+    const modalMailBtn = document.getElementById('modal-mail-btn');
+
+    document.querySelectorAll('.team-member').forEach(member => {
+      member.addEventListener('click', () => {
+        const data = JSON.parse(member.getAttribute('data-member'));
+        
+        modalName.innerText = data.name;
+        modalRole.innerText = data.role;
+        modalEmail.innerText = data.email;
+        modalBday.innerText = data.birthday;
+        modalPhone.innerText = data.phone;
+        modalDni.innerText = data.dni;
+        modalImg.src = data.img;
+        
+        modal.classList.add('open');
+      });
+    });
+
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('open');
+    });
+
+    modalMailBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const email = modalEmail.innerText;
+      window.location.href = `mailto:${email}`;
+    });
+
+    // Formulario de contacto
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('formSuccess').style.display = 'block';
+      this.reset();
+      setTimeout(() => {
+        document.getElementById('formSuccess').style.display = 'none';
+      }, 3000);
+    });
+
+    // Animaciones de entrada - se ejecutarán después del preloader
+    function initFadeInAnimations() {
+      document.querySelectorAll('.fade-in').forEach((el, index) => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(20px)';
+
+        setTimeout(() => {
+          el.style.opacity = 1;
+          el.style.transform = 'translateY(0)';
+        }, index * 200);
+      });
+    }
+
+  </script>
+  <script src="hyper.js"></script>
+  <script>
+      // Create quantum systems with enhanced configuration
+      const quantumSystems = {
+        glass: new GlassSystem({
+          intensity: 0.9,
+          blurAmount: 25,
+          saturation: 200
+        }),
+        
+        kinetic: new KineticEngine({
+          energy: 1.4,
+          sensitivity: 0.9,
+          duration: 0.8
+        }),
+        
+        scroll: new QuantumScroll({
+          smoothness: 0.7,
+          speed: 1.2,
+          direction: 'vertical'
+        }),
+        
+        neural: new NeuralInterface()
+      };
+      
+      // Global access for debugging
+      window.QUANTUM = quantumSystems;
+      
+      // Apply glass effects to existing elements
+      document.querySelectorAll('.card, .publication-card, .team-card').forEach(card => {
+        card.classList.add('glass-effect', 'magnetic');
+      });
+      
+      // Apply kinetic text to headings
+      document.querySelectorAll('h1, h2, h3').forEach(heading => {
+        heading.setAttribute('data-scroll-reveal', 'fadeUp');
+        heading.classList.add('neon-glow');
+      });
+      
+      // Add quantum elements
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.add('scroll-reveal', 'quantum-element');
+      });
+      
+      // Performance monitoring
+      const performanceMonitor = {
+        fps: 0,
+        lastTime: performance.now(),
+        
+        update() {
+          const now = performance.now();
+          this.fps = 1000 / (now - this.lastTime);
+          this.lastTime = now;
+          
+          if (this.fps < 30) {
+            console.warn('Performance warning: FPS below 30');
+          }
+          
+          requestAnimationFrame(() => this.update());
+        }
+      };
+      
+      performanceMonitor.update();
+
+    // QUANTUM SYSTEMS INITIALIZATION
+    window.addEventListener('load', () => {
+      // Initialize animations
+      initFadeInAnimations();
+      initQuantumSystems();
+    });
+
+    function initQuantumSystems() {
+      // Quantum canvas initializations
+      initQuantumCanvases();
+      
+      // Navigation interactions
+      initNavigation();
+    }
+
+    function initQuantumCanvases() {
+      // Hero Canvas
+      const heroCanvas = document.getElementById('heroQuantumCanvas');
+      if (heroCanvas) {
+        createQuantumVisualization(heroCanvas, 'hero');
+      }
+
+      // About Canvas
+      const aboutCanvas = document.getElementById('aboutQuantumViz');
+      if (aboutCanvas) {
+        createQuantumVisualization(aboutCanvas, 'about');
+      }
+
+      // Project Canvas
+      const projectCanvas = document.getElementById('projectQuantumViz');
+      if (projectCanvas) {
+        createQuantumVisualization(projectCanvas, 'project');
+      }
+    }
+
+    function createQuantumVisualization(canvas, type) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+
+      const particles = [];
+      const particleCount = type === 'hero' ? 15 : 10;
+
+      // Initialize particles
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2,
+          size: Math.random() * 3 + 1,
+          opacity: Math.random() * 0.5 + 0.3
+        });
+      }
+
+      const animate = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Update and draw particles
+        particles.forEach(particle => {
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+
+          // Bounce off edges
+          if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+          if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+
+          // Draw particle
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 215, 0, ${particle.opacity})`;
+          ctx.fill();
+        });
+
+        // Draw connections
+        particles.forEach((particle, i) => {
+          particles.slice(i + 1).forEach(otherParticle => {
+            const dx = particle.x - otherParticle.x;
+            const dy = particle.y - otherParticle.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 100) {
+              ctx.beginPath();
+              ctx.moveTo(particle.x, particle.y);
+              ctx.lineTo(otherParticle.x, otherParticle.y);
+              ctx.strokeStyle = `rgba(255, 215, 0, ${0.3 * (1 - distance / 100)})`;
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          });
+        });
+
+        requestAnimationFrame(animate);
+      };
+
+      animate();
+    }
+
+    function initNavigation() {
+      const navLinks = document.querySelectorAll('.quantum-link');
+      const navToggle = document.getElementById('navToggle');
+      const navMenu = document.getElementById('navMenu');
+
+      // Smooth scrolling for navigation links
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+          
+          if (targetSection) {
+            targetSection.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Mobile menu toggle for Quantum nav
+      if (navToggle && quantumNavMenu) {
+        navToggle.addEventListener('click', () => {
+          quantumNavMenu.classList.toggle('active');
+          navToggle.classList.toggle('active');
+        });
+      }
+
+      // Quantum button effects
+      const quantumBtns = document.querySelectorAll('.quantum-btn');
+      quantumBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const ripple = btn.querySelector('.btn-quantum-ripple');
+          if (ripple) {
+            ripple.style.animation = 'none';
+            ripple.offsetHeight; // Trigger reflow
+            ripple.style.animation = 'quantumRipple 0.6s ease-out';
+          }
+        });
+      });
+    }
+
+    // QUANTUM SCROLL PROGRESS INDICATOR
+    class QuantumScrollProgress {
+      constructor() {
+        this.createProgressIndicator();
+        this.bindScrollEvents();
+      }
+
+      createProgressIndicator() {
+        const progressBar = document.createElement('div');
+        progressBar.className = 'quantum-scroll-progress';
+        progressBar.innerHTML = `
+          <div class="progress-track">
+            <div class="progress-fill"></div>
+          </div>
+        `;
+        
+        progressBar.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          z-index: 10000;
+          background: rgba(0, 0, 0, 0.1);
+        `;
+
+        const progressFill = progressBar.querySelector('.progress-fill');
+        progressFill.style.cssText = `
+          height: 100%;
+          width: 0%;
+          background: linear-gradient(90deg, #FFD700, #FFA500, #FF8C00);
+          transition: width 0.1s ease;
+          box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        `;
+
+        document.body.appendChild(progressBar);
+        this.progressFill = progressFill;
+      }
+
+      bindScrollEvents() {
+        window.addEventListener('scroll', () => {
+          const scrollTop = window.pageYOffset;
+          const docHeight = document.body.scrollHeight - window.innerHeight;
+          const scrollPercent = (scrollTop / docHeight) * 100;
+          
+          this.progressFill.style.width = scrollPercent + '%';
+        });
+      }
+    }
+
+    // Initialize scroll progress
+    new QuantumScrollProgress();
+
+    // QUANTUM INTERSECTION OBSERVER
+    class QuantumObserver {
+      constructor() {
+        this.setupScrollReveal();
+        this.setupParallaxElements();
+      }
+
+      setupScrollReveal() {
+        const revealElements = document.querySelectorAll('[data-scroll-reveal]');
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const delay = entry.target.dataset.scrollDelay || 0;
+              
+              setTimeout(() => {
+                entry.target.classList.add('scroll-revealed');
+                this.triggerRevealAnimation(entry.target);
+              }, delay);
+              
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => {
+          el.classList.add('scroll-hidden');
+          observer.observe(el);
+        });
+      }
+
+      triggerRevealAnimation(element) {
+        const animationType = element.dataset.scrollReveal;
+        
+        switch (animationType) {
+          case 'fadeUp':
+            element.style.transform = 'translateY(0)';
+            element.style.opacity = '1';
+            break;
+          case 'fadeLeft':
+            element.style.transform = 'translateX(0)';
+            element.style.opacity = '1';
+            break;
+          case 'fadeRight':
+            element.style.transform = 'translateX(0)';
+            element.style.opacity = '1';
+            break;
+          case 'scale':
+            element.style.transform = 'scale(1)';
+            element.style.opacity = '1';
+            break;
+        }
+      }
+
+      setupParallaxElements() {
+        const parallaxElements = document.querySelectorAll('[data-parallax]');
+        
+        window.addEventListener('scroll', () => {
+          const scrollTop = window.pageYOffset;
+          
+          parallaxElements.forEach(element => {
+            const speed = parseFloat(element.dataset.parallax) || 0.5;
+            const yPos = -(scrollTop * speed);
+            element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+          });
+        });
+      }
+    }
+
+    // Initialize quantum observer
+    new QuantumObserver();
+
+    // Performance monitor removed for optimization
+
+  </script>
+
+  <!-- QUANTUM STYLES FOR NEW ELEMENTS -->
+  <style>
+    /* Scroll reveal animations */
+    .scroll-hidden {
+      opacity: 0;
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .scroll-hidden[data-scroll-reveal="fadeUp"] {
+      transform: translateY(50px);
+    }
+
+    .scroll-hidden[data-scroll-reveal="fadeLeft"] {
+      transform: translateX(-50px);
+    }
+
+    .scroll-hidden[data-scroll-reveal="fadeRight"] {
+      transform: translateX(50px);
+    }
+
+    .scroll-hidden[data-scroll-reveal="scale"] {
+      transform: scale(0.8);
+    }
+
+    /* Quantum button ripple effect */
+    @keyframes quantumRipple {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    .btn-quantum-ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      transform: scale(0);
+      animation: quantumRipple 0.6s linear;
+      pointer-events: none;
+    }
+
+    /* Quantum navigation styles */
+    .quantum-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      background: rgba(26, 26, 26, 0.9);
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .nav-brand-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #FFD700;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .quantum-link {
+      position: relative;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .quantum-link:hover {
+      color: #FFD700;
+    }
+
+    .link-quantum-effect {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #FFD700;
+      transition: width 0.3s ease;
+    }
+
+    .quantum-link:hover .link-quantum-effect {
+      width: 100%;
+    }
+
+    /* Quantum sections */
+    .quantum-hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+      overflow: hidden;
+    }
+
+    .hero-quantum-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 1200px;
+      padding: 2rem;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 8rem);
+      font-weight: 900;
+      margin-bottom: 2rem;
+      line-height: 1.1;
+    }
+
+    .title-line {
+      display: block;
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .quantum-btn {
+      position: relative;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .quantum-btn.primary {
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      color: #1a1a1a;
+    }
+
+    .quantum-btn.secondary {
+      background: transparent;
+      color: #FFD700;
+      border: 2px solid #FFD700;
+    }
+
+    .quantum-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 2rem;
+      border-radius: 15px;
+      min-width: 150px;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 3rem;
+      font-weight: 900;
+      color: #FFD700;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    /* Section containers */
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+
+    .section-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      font-size: 1.3rem;
+      text-align: center;
+      color: #ccc;
+      margin-bottom: 4rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Social Media Cards - Optimized */
+    .social-card {
+      padding: 1.5rem;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+      max-width: 350px;
+      margin: 0 auto;
+    }
+
+    .social-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .social-icon-container {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .social-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 215, 0, 0.1);
+    }
+
+    .social-icon svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    .youtube-icon { color: #FF0000; }
+    .instagram-icon { color: #E4405F; }
+    .linkedin-icon { color: #0077B5; }
+    .twitter-icon { color: #1DA1F2; }
+    .tiktok-icon { color: #000000; }
+    .whatsapp-icon { color: #25D366; }
+
+    .social-content {
+      text-align: center;
+    }
+
+    .social-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #FFD700;
+    }
+
+    .social-description {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .social-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .social-stats .stat {
+      text-align: center;
+    }
+
+    .social-stats .stat-number {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #FFD700;
+    }
+
+    .social-stats .stat-label {
+      font-size: 0.8rem;
+      color: #999;
+    }
+
+    .social-btn {
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+    }
+
+    .social-cta {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 2rem;
+      background: rgba(255, 215, 0, 0.05);
+      border-radius: 15px;
+    }
+
+    .cta-title {
+      font-size: 1.8rem;
+      color: #FFD700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-description {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+    }
+
+    .social-quick-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .quick-link {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 215, 0, 0.1);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .quick-link:hover {
+      transform: scale(1.1);
+      background: rgba(255, 215, 0, 0.2);
+    }
+
+    .quick-icon {
+      font-size: 1.5rem;
+    }
+
+    /* Performance Optimizations */
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Fix text margins and overflow */
+    * {
+      box-sizing: border-box;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    body {
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: auto;
+      position: relative;
+    }
+
+    /* Fix quantum navigation to stay fixed */
+    .quantum-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 15, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+    }
+
+    /* Add padding to main container to account for fixed nav */
+    .quantum-container {
+      padding-top: 80px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      word-wrap: break-word;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      line-height: 1.7;
+      word-wrap: break-word;
+      max-width: 100%;
+    }
+
+    /* Prevent text overflow in all containers */
+    .section-container,
+    .glass-effect,
+    .social-card,
+    .card-content,
+    .content-description {
+      max-width: 100%;
+      overflow: hidden;
+      word-wrap: break-word;
+    }
+
+    /* Fix container widths */
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    .hero-content {
+      max-width: 100%;
+      padding: 2rem 1rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 6vw, 5rem);
+      word-break: break-word;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      max-width: 90%;
+    }
+
+    /* Cursor fix */
+    body {
+      cursor: default;
+    }
+
+    a, button {
+      cursor: pointer;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .section-container {
+        padding: 3rem 1rem;
+      }
+      
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .quantum-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+      
+      .hero-stats {
+        gap: 1rem;
+        flex-direction: column;
+      }
+      
+      .stat-item {
+        min-width: 100%;
+        padding: 1.5rem;
+      }
+
+      .social-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+
+      .social-card {
+        max-width: 100%;
+        padding: 1.5rem 1rem;
+      }
+
+      .social-description {
+        font-size: 0.85rem;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+      }
+
+      .section-subtitle {
+        font-size: 1rem;
+        padding: 0 1rem;
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 10vw, 4rem);
+      }
+
+      .nav-brand-text {
+        font-size: 1.2rem;
+      }
+
+      .social-stats {
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .cta-title {
+        font-size: 1.5rem;
+      }
+
+      .cta-description {
+        font-size: 1rem;
+      }
+
+      .social-quick-links {
+        gap: 1rem;
+      }
+
+      .quick-link {
+        width: 45px;
+        height: 45px;
+      }
+    }
+
+    /* Extra small devices */
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: clamp(1.8rem, 12vw, 3rem);
+      }
+
+      .section-title {
+        font-size: clamp(1.8rem, 10vw, 2.5rem);
+      }
+
+      .social-icon {
+        width: 50px;
+        height: 50px;
+      }
+
+      .social-icon svg {
+        width: 25px;
+        height: 25px;
+      }
+
+      .social-title {
+        font-size: 1.1rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+      }
+    }
+  </style>
+
+  <!-- Splash Screen Script -->
+  <script>
+    // Ocultar splash screen después de 4 segundos
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        const splash = document.getElementById('splash-screen');
+        if (splash) {
+          splash.style.opacity = '0';
+          splash.style.visibility = 'hidden';
+          setTimeout(function() {
+            splash.style.display = 'none';
+          }, 500);
+        }
+      }, 4000);
+    });
+
+    // Prevenir scroll mientras el splash está activo
+    document.body.style.overflow = 'hidden';
+    setTimeout(function() {
+      document.body.style.overflow = 'auto';
+    }, 4500);
+  </script>
+</body>
+
+</html>
